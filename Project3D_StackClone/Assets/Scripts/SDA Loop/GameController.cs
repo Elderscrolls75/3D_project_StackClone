@@ -2,11 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using SDA.UI;
+using SDA.Input;
 
 namespace SDA.Loop
 {
     public class GameController : MonoBehaviour
     {
+        [SerializeField] private MenuView menuView;
+
+        [SerializeField] private StackInput stackInput;
         private MenuState menuState;
         private GameState gameState;
 
@@ -22,7 +27,7 @@ namespace SDA.Loop
             transitionToGameState += () => ChangeState(gameState);
 
 
-            menuState = new MenuState(transitionToGameState);
+            menuState = new MenuState(transitionToGameState, menuView);
             gameState = new GameState();
 
             ChangeState(menuState);
